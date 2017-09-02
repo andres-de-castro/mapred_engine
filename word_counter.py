@@ -4,11 +4,12 @@ import sys
 from collections import defaultdict
 
 from helpers.pre_process import read_file
-from map_reduce_multicore import MapReduce
+from map_reduce import MapReduce
 
 WORD_RE = re.compile(r"[\w']+")
 
 class WordCounter(MapReduce):
+
 
     def mapper(self, line):
         for word in WORD_RE.findall(line):
@@ -16,8 +17,7 @@ class WordCounter(MapReduce):
 
 
     def combiner(self, entry):
-        named_entry = entry[0], entry[1]
-        return named_entry
+        return entry
 
 
     def reducer(self, key, entries):

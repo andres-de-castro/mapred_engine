@@ -34,7 +34,6 @@ class MapReduce(object):
     def execute(self, chunk):
         acc = defaultdict(list)
         for line in chunk:
-            # print(line)
             mapped = self.mapper(line)
             while True:
                 try:
