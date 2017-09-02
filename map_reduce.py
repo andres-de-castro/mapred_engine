@@ -22,8 +22,6 @@ class MapReduce(object):
         raise NotImplementedError
 
 
-
-
     def run(self):
         acc = defaultdict(list)
         lines = self.file_reader(self.file_name)
@@ -32,10 +30,10 @@ class MapReduce(object):
             while True:
                 try:
                     entry = next(mapped)
-                    combined = self.combiner(entry)
-                    acc[combined[0]].append(combined[1])
                 except StopIteration:
                     break
+                combined = self.combiner(entry)
+                acc[combined[0]].append(combined[1])
         results = []
         for key in acc:
             reduced = self.reducer(key, acc[key])

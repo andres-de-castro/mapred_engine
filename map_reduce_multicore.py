@@ -69,8 +69,3 @@ class MapReduce(object):
         pool.join()
         joined = self.join_results(results)
         return joined
-        # print(results)
-        # print(results)
-        # pool = multiprocessing.Pool(processes=self.cores)
-        # pool.starmap(self.execute, chunks).get()
-
