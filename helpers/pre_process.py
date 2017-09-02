@@ -1,6 +1,7 @@
 import yaml
 import itertools
 
+
 def read_file(file_name):
     with open(file_name, 'r') as f:
         return f.readlines()
@@ -24,11 +25,3 @@ def chunkify(iterable, n_chunks):
         chunks[next(cycle_range)].append(item)
 
     return chunks
-
-
-# def chunkify(iterable, size):
-#     it = iter(iterable)
-#     item = list(itertools.islice(it, size))
-#     while item:
-#         yield item
-#         item = list(itertools.islice(it, size))
