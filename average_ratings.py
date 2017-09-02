@@ -4,7 +4,7 @@ import sys
 from collections import defaultdict
 
 from helpers.pre_process import read_file, yaml_read, yaml_to_map
-from map_reduce import MapReduce
+from map_reduce_multicore import MapReduce
 
 
 class AverageRatings(MapReduce):

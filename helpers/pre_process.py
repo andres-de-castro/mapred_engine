@@ -4,7 +4,8 @@ import itertools
 
 def read_file(file_name):
     with open(file_name, 'r') as f:
-        return f.readlines()
+        for line in f:
+            yield line
 
 
 def yaml_read(file_name):
