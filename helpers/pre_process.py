@@ -8,7 +8,8 @@ def read_file(file_name):
 
 def yaml_read(file_name):
     lines = read_file(file_name)
-    return [yaml.safe_load(line) for line in lines]
+    for line in lines:
+        yield yaml.safe_load(line)
 
 
 def yaml_to_map(file_name, key, value):
