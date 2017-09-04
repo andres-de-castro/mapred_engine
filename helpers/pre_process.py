@@ -3,8 +3,7 @@ import itertools
 
 def read_file(file_name):
     with open(file_name, 'r') as f:
-        for line in f:
-            yield line
+        yield from f
 
 
 def yaml_read(file_name):

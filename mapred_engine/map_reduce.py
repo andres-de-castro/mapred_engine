@@ -15,10 +15,15 @@ class MapReduceSingleCore(MapReduceBase):
 
 
     def execute(self):
+        acc = defaultdict(list)
         lines = self.file_reader(self.file_name)
-        acc = self.map_combine(lines)
-        results = self.reduce_combine(acc)
 
+        for line in lines:
+            mapped = self.mapper(line)
+            for record in mapped:
+                acc[record[0]].append(record[1])
+
+        results = self.reduce_combine(acc)
         return results
 
 
@@ -42,7 +47,11 @@ class MapReduceMultiCore(MapReduceBase):
 
 
     def execute(self, chunk):
-        acc = self.map_combine(chunk)
+        acc = defaultdict(list)
+        for line in chunk:
+            mapped = self.mapper(line)
+            for record in mapped:
+                acc[record[0]].append(record[1])
         results = self.reduce_combine(acc)
         return results
 
