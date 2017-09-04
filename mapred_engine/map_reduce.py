@@ -13,7 +13,6 @@ class MapReduce(MapReduceBase):
         self.file_name = sys.argv[1]
         self.file_reader = file_reader
 
-
     def map_combine(self, lines):
         acc = defaultdict(list)
         for line in lines:

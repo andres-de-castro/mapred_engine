@@ -14,9 +14,9 @@
 
     >> pip install -e .
 
-5) Run the scripts
+5) Run the scripts, note the -m flag for multicore (default False)
 
-    >> python word_counter.py data/raw/if-kipling.txt
+    >> python word_counter.py data/raw/if-kipling.txt -m True
 
-    >> python average_ratings.py data/raw/ratings.txt
+    >> python average_ratings.py data/raw/ratings.txt -m True
 

@@ -3,11 +3,13 @@ import sys
 
 from collections import defaultdict
 
+import helpers
 from helpers.pre_process import read_file, yaml_read, yaml_to_map
-from mapred_engine.map_reduce import MapReduce, MapReduceMultiCore
+from helpers.parse_args import args
 
+Base = helpers.parse_args.get_map_reduce_class()
 
-class AverageRatings(MapReduce):
+class AverageRatings(Base):
 
     def __init__(self):
         #let's overwrite the file reader with something better
