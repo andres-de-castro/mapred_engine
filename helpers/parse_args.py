@@ -1,5 +1,5 @@
 import argparse
-from mapred_engine.map_reduce import MapReduce, MapReduceMultiCore
+from mapred_engine.map_reduce import MapReduceSingleCore, MapReduceMultiCore
 
 parser = argparse.ArgumentParser(
         description=
@@ -24,4 +24,4 @@ def get_map_reduce_class():
     if args['m']:
         return MapReduceMultiCore
     else:
-        return MapReduce
+        return MapReduceSingleCore

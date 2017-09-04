@@ -7,9 +7,9 @@ import helpers
 from helpers.pre_process import read_file, yaml_read, yaml_to_map
 from helpers.parse_args import args
 
-Base = helpers.parse_args.get_map_reduce_class()
+MapReduce = helpers.parse_args.get_map_reduce_class()
 
-class AverageRatings(Base):
+class AverageRatings(MapReduce):
 
     def __init__(self):
         #let's overwrite the file reader with something better

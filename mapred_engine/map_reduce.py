@@ -7,28 +7,11 @@ from collections import defaultdict
 from mapred_engine.map_reduce_base import MapReduceBase
 
 
-class MapReduce(MapReduceBase):
+class MapReduceSingleCore(MapReduceBase):
 
     def __init__(self, file_reader=read_file):
         self.file_name = sys.argv[1]
         self.file_reader = file_reader
-
-    def map_combine(self, lines):
-        acc = defaultdict(list)
-        for line in lines:
-            mapped = self.mapper(line)
-            while True:
-                try:
-                    record = next(mapped)
-                except StopIteration:
-                    break
-                acc[record[0]].append(record[1])
-        return acc
-
-
-    def reduce_combine(self, acc):
-        results = [self.reducer(key, acc[key]) for key in acc]
-        return results
 
 
     def execute(self):
@@ -56,23 +39,6 @@ class MapReduceMultiCore(MapReduceBase):
         lines = self.file_reader(self.file_name)
         chunks = chunkify(lines, self.cores)
         return chunks
-
-
-    def map_combine(self, chunk):
-        acc = defaultdict(list)
-        for line in chunk:
-            mapped = self.mapper(line)
-            while True:
-                try:
-                    record = next(mapped)
-                except StopIteration:
-                    break
-                acc[record[0]].append(record[1])
-        return acc
-
-
-    def reduce_combine(self, acc):
-        return [self.reducer(key, acc[key]) for key in acc]
 
 
     def execute(self, chunk):

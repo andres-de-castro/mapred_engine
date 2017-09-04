@@ -1,7 +1,6 @@
 import yaml
 import itertools
 
-
 def read_file(file_name):
     with open(file_name, 'r') as f:
         for line in f:
@@ -10,8 +9,7 @@ def read_file(file_name):
 
 def yaml_read(file_name):
     lines = read_file(file_name)
-    lines = [yaml.safe_load(line) for line in lines]
-    return lines
+    return [yaml.safe_load(line) for line in lines]
 
 
 def yaml_to_map(file_name, key, value):

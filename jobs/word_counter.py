@@ -7,11 +7,10 @@ import helpers
 from helpers.pre_process import read_file
 from helpers.parse_args import args
 
-Base = helpers.parse_args.get_map_reduce_class()
-
+MapReduce = helpers.parse_args.get_map_reduce_class()
 WORD_RE = re.compile(r"[\w']+")
 
-class WordCounter(Base):
+class WordCounter(MapReduce):
 
     def mapper(self, line):
         for word in WORD_RE.findall(line):
