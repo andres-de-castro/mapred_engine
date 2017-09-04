@@ -3,6 +3,7 @@ from itertools import chain
 
 class MapReduceBase(object):
 
+
     def combiner(self):
         raise NotImplementedError
 

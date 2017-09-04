@@ -7,13 +7,18 @@ import helpers
 from helpers.pre_process import yaml_read, yaml_to_map
 from helpers.parse_args import args
 
+import yaml
+
 MapReduce = helpers.parse_args.get_map_reduce_class()
 
 class AverageRatings(MapReduce):
 
     def __init__(self):
         #let's overwrite the file reader with something better
-        super(AverageRatings, self).__init__(file_reader=yaml_read)
+        super(AverageRatings, self).__init__(
+                file_reader=yaml_read,
+                line_parse=yaml.safe_load
+        )
 
 
     def mapper(self, line):
