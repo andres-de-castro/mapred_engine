@@ -30,22 +30,6 @@ def count_lines(file_name):
     return count
 
 
-#thanks nedbar
-def chunks(l, n):
-    """Yield successive n-sized chunks from l."""
-    for i in range(0, len(l), n):
-        yield l[i:i + n]
-
-
-def chunkify(iterable, n_chunks):
-    chunks = tuple(list() for _ in range(n_chunks))
-    cycle_range = itertools.cycle(range(n_chunks))
-    for item in iterable:
-        chunks[next(cycle_range)].append(item)
-
-    return chunks
-
-
 def chunkify_lines(chunks, l, n_lines):
     ranges = []
     start = 1

@@ -7,8 +7,6 @@ from helpers.pre_process import (
     read_file,
     chunkify_lines,
     count_lines,
-    chunks,
-    read_chunks_from_file
     )
 from collections import defaultdict
 
