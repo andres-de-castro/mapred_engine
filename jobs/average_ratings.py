@@ -4,7 +4,7 @@ import sys
 from collections import defaultdict
 
 import helpers
-from helpers.pre_process import read_file, yaml_read, yaml_to_map
+from helpers.pre_process import yaml_read, yaml_to_map
 from helpers.parse_args import args
 
 MapReduce = helpers.parse_args.get_map_reduce_class()
