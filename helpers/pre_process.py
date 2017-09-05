@@ -6,10 +6,11 @@ def read_file(file_name):
         yield from f
 
 
-def read_chunks_from_file(file_name, n_lines):
-    with open(file_name) as f:
-        for next_n_lines in itertools.zip_longest(*[f] * n_lines):
-            yield next_n_lines
+def read_specific_lines(file_name, line_numbers):
+    with open(file_name, 'r') as f:
+        for index, line in enumerate(f):
+            if index in line_numbers:
+                yield line
 
 
 def yaml_read(file_name):
@@ -24,15 +25,12 @@ def yaml_to_map(file_name, key, value):
 
 
 def count_lines(file_name):
-    count = 0
-    for line in read_file(file_name):
-        count += 1
-    return count
+    return sum(1 for line in open(file_name))
 
 
 def chunkify_lines(chunks, l, n_lines):
     ranges = []
-    start = 1
+    start = 0
     for _ in range(chunks-1):
         old_start = start
         start = start + l

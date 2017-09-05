@@ -1,12 +1,12 @@
 import sys
 import multiprocessing
-import linecache
 import yaml
 
 from helpers.pre_process import (
     read_file,
     chunkify_lines,
     count_lines,
+    read_specific_lines
     )
 from collections import defaultdict
 
@@ -54,10 +54,10 @@ class MapReduceMultiCore(MapReduceBase):
         yield chunks
 
 
-    def execute(self, ranges):
+    def execute(self, line_numbers):
         acc = defaultdict(list)
-        for line_n in ranges:
-            line = linecache.getline(self.file_name, line_n)
+        lines = read_specific_lines(self.file_name, line_numbers)
+        for line in lines:
             if self.line_parse:
                 line = self.line_parse(line)
             mapped = self.mapper(line)
@@ -82,9 +82,9 @@ class MapReduceMultiCore(MapReduceBase):
     def run(self):
         n_lines = count_lines(self.file_name)
         lines_per_chunk = round(n_lines / self.cores)
-        ranges = chunkify_lines(self.cores, lines_per_chunk, n_lines)
+        line_numbers = chunkify_lines(self.cores, lines_per_chunk, n_lines)
         with multiprocessing.Pool(processes=self.cores) as pool:
-            results = pool.map_async(self.execute, ranges).get()
+            results = pool.map_async(self.execute, line_numbers).get()
         pool.join()
         joined = self.join_reduce(results)
         return joined

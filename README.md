@@ -1,6 +1,14 @@
 # mapred_engine
 
-1) git checkout the repo
+This is an implementation of single / multi-core mapreduce.
+
+The multicore implementation calculates the length of the file, generates a of range objects which represent file line indices and passes them to the subprocess.
+Lines are then read via linecache, this allows
+
+
+Steps:
+
+1) git checkout this repo
 
 2) install venv with:
 
