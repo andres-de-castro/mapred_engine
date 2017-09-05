@@ -48,12 +48,6 @@ class MapReduceMultiCore(MapReduceBase):
         self.cores = multiprocessing.cpu_count()
 
 
-    def split_input(self):
-        lines = self.file_reader(self.file_name)
-        chunks = chunkify(lines, self.cores)
-        yield chunks
-
-
     def execute(self, line_numbers):
         acc = defaultdict(list)
         lines = read_specific_lines(self.file_name, line_numbers)
