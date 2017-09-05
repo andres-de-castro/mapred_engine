@@ -14,17 +14,15 @@ MapReduce = helpers.parse_args.get_map_reduce_class()
 class AverageRatings(MapReduce):
 
     def __init__(self):
-        #let's overwrite the file reader with something better
+        #let's overwrite the line parser with something better
         super(AverageRatings, self).__init__(
                 line_parse=yaml.safe_load
         )
 
 
     def mapper(self, line):
-        #filter user_id
-        filters =  ['movie_id', 'rating']
-        filtered = dict((key,value) for key, value in line.items() if key in filters)
-        yield filtered['movie_id'], filtered['rating']
+        #filter keys we want
+        yield line['movie_id'], line['rating']
 
 
     def reducer(self, key, entries):
