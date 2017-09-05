@@ -1,9 +1,7 @@
 import sys
 import multiprocessing
-import yaml
 
 from helpers.pre_process import (
-    read_file,
     chunkify_lines,
     count_lines,
     read_specific_lines
