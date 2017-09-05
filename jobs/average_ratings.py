@@ -16,7 +16,6 @@ class AverageRatings(MapReduce):
     def __init__(self):
         #let's overwrite the file reader with something better
         super(AverageRatings, self).__init__(
-                file_reader=yaml_read,
                 line_parse=yaml.safe_load
         )
 
