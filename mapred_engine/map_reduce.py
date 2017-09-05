@@ -16,20 +16,12 @@ from mapred_engine.map_reduce_base import MapReduceBase
 class MapReduceSingleCore(MapReduceBase):
 
     def __init__(self, line_parse=None):
-        self.file_name = sys.argv[1]
+        super(MapReduceSingleCore, self).__init__()
         self.line_parse = line_parse
 
 
     def execute(self):
-        acc = defaultdict(list)
-
-        for line in open(self.file_name):
-            if self.line_parse:
-                line = self.line_parse(line)
-            mapped = self.mapper(line)
-            for record in mapped:
-                acc[record[0]].append(record[1])
-
+        acc = self.accumulate(open(self.file_name))
         results = self.reduce_combine(acc)
         return results
 
@@ -42,20 +34,14 @@ class MapReduceSingleCore(MapReduceBase):
 class MapReduceMultiCore(MapReduceBase):
 
     def __init__(self, line_parse=None):
-        self.file_name = sys.argv[1]
+        super(MapReduceMultiCore, self).__init__()
         self.line_parse = line_parse
         self.cores = multiprocessing.cpu_count()
 
 
     def execute(self, line_numbers):
-        acc = defaultdict(list)
         lines = read_specific_lines(self.file_name, line_numbers)
-        for line in lines:
-            if self.line_parse:
-                line = self.line_parse(line)
-            mapped = self.mapper(line)
-            for record in mapped:
-                acc[record[0]].append(record[1])
+        acc = self.accumulate(lines)
         results = self.reduce_combine(acc)
         return results
 

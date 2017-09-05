@@ -1,12 +1,11 @@
+import sys
+
 from collections import defaultdict
-from itertools import chain
 
 class MapReduceBase(object):
 
-
-    def combiner(self):
-        raise NotImplementedError
-
+    def __init__(self):
+        self.file_name = sys.argv[1]
 
     def mapper(self):
         raise NotImplementedError
@@ -18,3 +17,14 @@ class MapReduceBase(object):
 
     def reduce_combine(self, acc):
         return [self.reducer(key, acc[key]) for key in acc]
+
+
+    def accumulate(self, iterable):
+        acc = defaultdict(list)
+        for line in iterable:
+            if self.line_parse:
+                line = self.line_parse(line)
+            mapped = self.mapper(line)
+            for record in mapped:
+                acc[record[0]].append(record[1])
+        return acc
