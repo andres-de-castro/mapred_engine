@@ -2,7 +2,7 @@
 
 This is an implementation of single / multi-core mapreduce.
 
-The multicore implementation calculates the length of the file, since the multiprocess module does not support pickling of generators we create a set of range objects which represent line indices and passes them to the subprocess. Each `node` iterates lazily through the files and only extracts the wanted lines.
+The multicore implementation calculates the length of the file, since the multiprocess module does not support pickling of generators we create a set of range objects which represent line indices and passes them to the subprocess. Each subprocess iterates lazily through the files and only extracts the wanted lines.
 
 
 Steps:
